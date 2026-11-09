@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shipyard | لوحة متابعة الطلبات</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <!-- القائمة الجانبية -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-logo">📦</div>
+                <div class="brand-text">
+                    <h1>Shipyard</h1>
+                    <span>نظام المتابعة الذكي</span>
+                </div>
+            </div>
+
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active">
+                    <span class="icon">📊</span>
+                    <span>لوحة التحكم</span>
+                </a>
+                <a href="#orders-section" class="nav-item">
+                    <span class="icon">🛒</span>
+                    <span>جميع الطلبات</span>
+                </a>
+                <a href="#" class="nav-item" id="btn-export-csv">
+                    <span class="icon">📥</span>
+                    <span>تصدير البيانات (CSV)</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button id="theme-toggle" class="theme-btn" type="button">
+                    <span id="theme-icon">🌙</span>
+                    <span id="theme-text">الوضع الليلي</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- المحتوى الرئيسي -->
+        <main class="main-content">
+            <!-- الشريط العلوي -->
+            <header class="top-header">
+                <div>
+                    <h2>Shipyard</h2>
+                    <p class="subtitle">نظرة عامة على أداء الطلبات والمبيعات اللحظية</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-primary" id="btn-open-modal">
+                        <span>+</span> إضافة طلب جديد
+                    </button>
+                </div>
+            </header>
+
+            <!-- بطاقات الإحصائيات -->
+            <section class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon total">📦</div>
+                    <div class="stat-info">
+                        <span class="stat-label">إجمالي الطلبات</span>
+                        <h3 class="stat-value" id="stat-total">0</h3>
+                        <span class="stat-meta">جميع الطلبات المسجلة</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon completed">✅</div>
+                    <div class="stat-info">
+                        <span class="stat-label">طلبات مكتملة</span>
+                        <h3 class="stat-value" id="stat-completed">0</h3>
+                        <span class="stat-meta" id="stat-completed-rate">0% نسبة الإنجاز</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon processing">⏳</div>
+                    <div class="stat-info">
+                        <span class="stat-label">قيد المعالجة والشحن</span>
+                        <h3 class="stat-value" id="stat-processing">0</h3>
+                        <span class="stat-meta">جاري تجهيزها للعملاء</span>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon revenue">💰</div>
+                    <div class="stat-info">
+                        <span class="stat-label">إجمالي المبيعات</span>
+                        <h3 class="stat-value" id="stat-revenue">0 د.أ</h3>
+                        <span class="stat-meta">صافي الطلبات غير الملغاة</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- شريط توزيع حالات الطلبات -->
+            <section class="distribution-card">
+                <div class="distribution-header">
+                    <h4>توزيع حالات الطلبات</h4>
+                    <div class="distribution-legend" id="status-legend"></div>
+                </div>
+                <div class="progress-stacked" id="status-progress-bar"></div>
+            </section>
+
+            <!-- قسم جدول الطلبات وأدوات الفلترة -->
+            <section class="table-card" id="orders-section">
+                <div class="table-toolbar">
+                    <div class="search-box">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" id="search-input" placeholder="ابحث برقم الطلب، اسم العميل، أو المنتج...">
+                    </div>
+
+                    <div class="filter-group">
+                        <div class="status-tabs" id="status-tabs">
+                            <button class="tab-btn active" data-status="all">الكل</button>
+                            <button class="tab-btn" data-status="completed">مكتمل</button>
+                            <button class="tab-btn" data-status="processing">قيد التنفيذ</button>
+                            <button class="tab-btn" data-status="pending">بانتظار الدفع</button>
+                            <button class="tab-btn" data-status="cancelled">ملغي</button>
+                        </div>
+
+                        <select id="sort-select" class="sort-select" aria-label="ترتيب حسب">
+                            <option value="date-desc">الأحدث أولاً</option>
+                            <option value="date-asc">الأقدم أولاً</option>
+                            <option value="amount-desc">الأعلى قيمة</option>
+                            <option value="amount-asc">الأقل قيمة</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="orders-table">
+                        <thead>
+                            <tr>
+                                <th>رقم الطلب</th>
+                                <th>العميل</th>
+                                <th>المنتج</th>
+                                <th>التاريخ</th>
+                                <th>المبلغ</th>
+                                <th>الحالة</th>
+                                <th>إجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="orders-tbody">
+                            <!-- يتم تعبئتها عبر JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="empty-state" class="empty-state hidden">
+                    <div class="empty-icon">📭</div>
+                    <h4>لا توجد طلبات مطابقة</h4>
+                    <p>جرب تغيير كلمات البحث أو فلتر الحالة لعرض النتائج</p>
+                </div>
+
+                <div class="table-footer">
+                    <span id="showing-count">عرض 0 من 0 طلب</span>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- نافذة إضافة طلب جديد -->
+    <div class="modal-overlay hidden" id="order-modal">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h3>إضافة طلب جديد</h3>
+                <button class="close-btn" id="btn-close-modal" aria-label="إغلاق">&times;</button>
+            </div>
+            <form id="order-form">
+                <div class="form-group">
+                    <label for="customer-name">اسم العميل</label>
+                    <input type="text" id="customer-name" required placeholder="مثال: عمر المجالي">
+                </div>
+                <div class="form-group">
+                    <label for="customer-city">المدينة</label>
+                    <input type="text" id="customer-city" required placeholder="مثال: عمان">
+                </div>
+                <div class="form-group">
+                    <label for="product-name">المنتج</label>
+                    <input type="text" id="product-name" required placeholder="مثال: سماعات لاسلكية برو">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="order-amount">المبلغ (د.أ)</label>
+                        <input type="number" id="order-amount" min="1" step="0.01" required placeholder="45">
+                    </div>
+                    <div class="form-group">
+                        <label for="order-status">حالة الطلب</label>
+                        <select id="order-status" required>
+                            <option value="processing">قيد التنفيذ</option>
+                            <option value="pending">بانتظار الدفع</option>
+                            <option value="completed">مكتمل</option>
+                            <option value="cancelled">ملغي</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" id="btn-cancel-modal">إلغاء</button>
+                    <button type="submit" class="btn btn-primary">حفظ الطلب</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

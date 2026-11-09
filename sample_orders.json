@@ -1,0 +1,65 @@
+[
+  {
+    "id": "ORD-1048",
+    "customer": "Omar Al-Majali",
+    "city": "Amman",
+    "product": "Dell XPS 15 Laptop",
+    "date": "2026-11-09",
+    "amount": 620.0,
+    "status": "completed"
+  },
+  {
+    "id": "ORD-1047",
+    "customer": "Lina Khasawneh",
+    "city": "Irbid",
+    "product": "Apple AirPods Pro",
+    "date": "2026-11-09",
+    "amount": 140.0,
+    "status": "processing"
+  },
+  {
+    "id": "ORD-1046",
+    "customer": "Tareq Haddad",
+    "city": "Zarqa",
+    "product": "Samsung 32-inch 4K Monitor",
+    "date": "2026-11-08",
+    "amount": 280.0,
+    "status": "completed"
+  },
+  {
+    "id": "ORD-1045",
+    "customer": "",
+    "city": "Salt",
+    "product": "Huawei GT4 Smartwatch",
+    "date": "2026-11-08",
+    "amount": 110.0,
+    "status": "pending"
+  },
+  {
+    "id": "ORD-1044",
+    "customer": "Rami Qudah",
+    "city": "Ajloun",
+    "product": "Wireless Mechanical Keyboard",
+    "date": "2026-11-07",
+    "amount": -25.0,
+    "status": "processing"
+  },
+  {
+    "id": "ORD-1043",
+    "customer": "Dana Al-Masri",
+    "city": "Aqaba",
+    "product": "iPad Air 5th Gen",
+    "date": "2026-11-07",
+    "amount": 450.0,
+    "status": "completed"
+  },
+  {
+    "id": "ORD-1042",
+    "customer": "Hamza Tamimi",
+    "city": "Amman",
+    "product": "Smart Wi-Fi Security Camera",
+    "date": "2026-11-06",
+    "amount": 45.0,
+    "status": "cancelled"
+  }
+]

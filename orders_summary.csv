@@ -1,0 +1,14 @@
+﻿=== SUMMARY BY STATUS (JOD / د.أ) ===
+status,order_count,total_amount_jod,average_amount_jod
+cancelled,1,45.00,45.00
+completed,3,1350.00,450.00
+pending,0,0.00,0.00
+processing,1,140.00,140.00
+
+=== VALIDATED ORDERS (JOD / د.أ) ===
+id,customer,city,product,date,amount_jod,status
+ORD-1048,Omar Al-Majali,Amman,Dell XPS 15 Laptop,2026-11-09,620.00,completed
+ORD-1047,Lina Khasawneh,Irbid,Apple AirPods Pro,2026-11-09,140.00,processing
+ORD-1046,Tareq Haddad,Zarqa,Samsung 32-inch 4K Monitor,2026-11-08,280.00,completed
+ORD-1043,Dana Al-Masri,Aqaba,iPad Air 5th Gen,2026-11-07,450.00,completed
+ORD-1042,Hamza Tamimi,Amman,Smart Wi-Fi Security Camera,2026-11-06,45.00,cancelled
